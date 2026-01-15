@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Portal Oasis · Mis Documentos</title>
+  <meta name="color-scheme" content="light dark" />
+
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Firebase (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- App -->
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="dot"></div>
+    <div>
+      <h1>Portal Oasis</h1>
+      <p class="muted">Acceso a facturas y cotizaciones</p>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <a id="hubLink" class="ghost" href="#" target="_self" rel="noopener">Hub</a>
+    <button id="logoutBtn" class="ghost hidden">Salir</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- LOGIN -->
+  <section id="loginCard" class="card">
+    <h2>Acceso por email</h2>
+    <p class="muted">Te enviaremos un enlace seguro para entrar a tus documentos.</p>
+
+    <div class="row">
+      <input id="emailInput" type="email" placeholder="tu@email.com" autocomplete="email" />
+      <button id="sendLinkBtn" class="primary">Enviar enlace</button>
+    </div>
+
+    <p id="loginMsg" class="hint"></p>
+
+    <div class="small muted">
+      * Si abriste el enlace en otro dispositivo y no entra, te pedirá confirmar el email.
+    </div>
+  </section>
+
+  <!-- LISTADO -->
+  <section id="listCard" class="card hidden">
+    <div class="between">
+      <div>
+        <h2>Mis documentos</h2>
+        <p id="whoami" class="muted">—</p>
+      </div>
+      <div class="filters">
+        <button class="chip active" data-filter="ALL">Todos</button>
+        <button class="chip" data-filter="FAC">Facturas</button>
+        <button class="chip" data-filter="COT">Cotizaciones</button>
+      </div>
+    </div>
+
+    <div id="docsList" class="list">Cargando…</div>
+  </section>
+
+  <!-- DETALLE -->
+  <section id="detailCard" class="card hidden">
+    <div class="between">
+      <div>
+        <h2>Detalle</h2>
+        <p class="muted" id="detailMeta">—</p>
+      </div>
+      <div class="detail-actions">
+        <button id="backBtn" class="ghost">Volver</button>
+        <button id="pdfBtn" class="primary">Descargar PDF</button>
+      </div>
+    </div>
+
+    <div id="detailBox" class="detail"></div>
+  </section>
+
+</main>
+
+<footer class="foot muted">
+  © Oasis · Portal Cliente
+</footer>
+
+</body>
+</html>
